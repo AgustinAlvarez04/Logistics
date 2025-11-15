@@ -1,9 +1,13 @@
-
 import pool from "../config/db.js";
 
 export const obtenerClientes = async () => {
   const [rows] = await pool.query("SELECT * FROM clientes");
   return rows;
+};
+
+export const obtenerClienteId = async (id) => {
+    const [rows] = await pool.query("SELECT * FROM clientes WHERE id = ?", [id]);
+    return rows[0];
 };
 
 export const crearCliente = async (nombre, email, telefono) => {

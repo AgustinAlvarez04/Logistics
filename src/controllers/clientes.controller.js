@@ -1,6 +1,6 @@
-
 import {
   obtenerClientes,
+  obtenerClienteId,
   crearCliente,
   actualizarCliente,
   eliminarCliente,
@@ -13,6 +13,19 @@ export const getClientes = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Error al obtener clientes" });
   }
+};
+
+export const getClienteById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const producto = await obtenerClienteId(id);
+        if (!producto) {
+            return res.status(404).json({ error: "Cliente no encontrado" });
+        }
+        res.json(producto);
+    } catch (error) {
+        res.status(500).json({ error: "Error al obtener clientes" });
+    }
 };
 
 export const postCliente = async (req, res) => {

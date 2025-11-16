@@ -10,18 +10,18 @@ export const obtenerClienteId = async (id) => {
     return rows[0];
 };
 
-export const crearCliente = async (nombre, email, telefono) => {
+export const crearCliente = async (nombre, direccion, telefono, email) => {
   const [result] = await pool.query(
-    "INSERT INTO clientes (nombre, email, telefono) VALUES (?, ?, ?)",
-    [nombre, email, telefono]
+    "INSERT INTO clientes (nombre, direccion, telefono, email) VALUES (?, ?, ?, ?)",
+    [nombre, direccion, telefono, email]
   );
   return { id: result.insertId };
 };
 
-export const actualizarCliente = async (id, nombre, email, telefono) => {
+export const actualizarCliente = async (id, nombre, direccion, telefono, email) => {
   await pool.query(
-    "UPDATE clientes SET nombre=?, email=?, telefono=? WHERE id=?",
-    [nombre, email, telefono, id]
+    "UPDATE clientes SET nombre=?, direccion=?, telefono=?, email=? WHERE id=?",
+    [nombre, email, telefono, direccion, id]
   );
 };
 

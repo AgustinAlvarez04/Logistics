@@ -4,7 +4,7 @@ import {
   crearCliente,
   actualizarCliente,
   eliminarCliente,
-} from "../services/clientesService.js";
+} from "../services/clientes.service.js";
 
 export const getClientes = async (req, res) => {
   try {
@@ -30,8 +30,8 @@ export const getClienteById = async (req, res) => {
 
 export const postCliente = async (req, res) => {
   try {
-    const { nombre, email, telefono } = req.body;
-    const nuevo = await crearCliente(nombre, email, telefono);
+    const { nombre, direccion, telefono, email } = req.body;
+    const nuevo = await crearCliente(nombre, direccion, telefono, email);
     res.status(201).json({ mensaje: "Cliente creado", id: nuevo.id });
   } catch (err) {
     res.status(500).json({ error: "Error al crear cliente" });
@@ -41,8 +41,8 @@ export const postCliente = async (req, res) => {
 export const putCliente = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, email, telefono } = req.body;
-    await actualizarCliente(id, nombre, email, telefono);
+    const { nombre, direccion, telefono, email } = req.body;
+    await actualizarCliente(id, nombre, direccion, telefono, email);
     res.json({ mensaje: "Cliente actualizado" });
   } catch (err) {
     res.status(500).json({ error: "Error al actualizar cliente" });
